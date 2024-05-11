@@ -3,7 +3,7 @@ on:
   push
 jobs: 
   trying:
-  runs-on: ubuntu-latest
-  steps:
-    - name: print my name
-    - run: echo "moSamy"
+    runs-on: ubuntu-latest
+    steps:
+      - name: print my name
+        run: echo "moSamy"
