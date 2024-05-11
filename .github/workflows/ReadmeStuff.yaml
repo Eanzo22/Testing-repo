@@ -1,21 +1,24 @@
-name: Edit Readme
-on: 
-  push
-jobs: 
-  trying:
-    runs-on: ubuntu-latest
-    steps:
-      - name: print my name
-        run: echo "moSamy"
+name: Edit README
 
-      - name: Checkout code 
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  edit-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Read README content
         id: read_readme
         run: |
           readme_content=$(cat README.md)
-          echo "{readme_content}={$readme_content}" >> $GITHUB_OUTPUT
+          echo "::set-output name=readme_content::$readme_content"
+
       - name: Modify README content
         run: |
           new_content="${{ steps.read_readme.outputs.readme_content }}"
