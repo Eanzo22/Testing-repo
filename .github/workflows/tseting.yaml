@@ -7,22 +7,3 @@ jobs:
     steps:
       - name: print my name
         run: echo "moSamy"
-
-      - name: Checkout code 
-        uses: actions/checkout@v2
-
-      - name: Read README content
-        id: read_readme
-        run: |
-          readme_content=$(cat README.md)
-          echo "{readme_content}={$readme_content}" >> $GITHUB_OUTPUT
-      - name: Modify README content
-        run: |
-          new_content="${{ steps.read_readme.outputs.readme_content }}"
-          new_content+="\nThis is a new line added at the end. Last edited by: ${GITHUB_ACTOR}"
-          echo -e "$new_content" > README.md
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git add README.md
-          git commit -m "Append content to README"
-          git push
