@@ -22,8 +22,8 @@ jobs:
       - name: Modify README content
         run: |
           new_line="This is a new line added at the end. Last edited by: ${GITHUB_ACTOR}"
-          new_content="${{ steps.read_readme.outputs.readme_content }}\n\n$new_line"
-          echo -e "$new_content" > README.md
+          new_content=$(echo -e "${{ steps.read_readme.outputs.readme_content }}\n\n$new_line")
+          echo "$new_content" > README.md
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
           git add README.md
