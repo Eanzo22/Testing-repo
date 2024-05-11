@@ -15,7 +15,7 @@ jobs:
         id: read_readme
         run: |
           readme_content=$(<README.md)
-          echo "::set-output name=readme_content::$readme_content"
+          echo "{readme_content}={$readme_content}" >> $GITHUB_OUTPUT
       - name: Modify README content
         run: |
           new_content=$(echo "${{ steps.read_readme.outputs.readme_content }}" | sed 's/old_text/new_text/g')
